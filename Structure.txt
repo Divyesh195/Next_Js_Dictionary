@@ -1,0 +1,3 @@
+Functionalities to add :
+
+Add a speech function, for better understanding of pronunciation.
