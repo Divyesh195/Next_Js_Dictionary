@@ -15,7 +15,7 @@ const WordsList = () => {
             if (responseJSON.ok) {
                 console.log("Words are fetched successfully...")
                 setWords(responseJSON['myWords'])
-                console.log(responseJSON['myWords'])
+                // console.log(responseJSON['myWords'])
             } else {
                 console.log("Error in fetching word.")
             }

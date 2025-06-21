@@ -1,3 +1,5 @@
 Functionalities to add :
 
 Add a speech function, for better understanding of pronunciation.
+
+Add a function that can remove white space in word added. (White spaces break URL)

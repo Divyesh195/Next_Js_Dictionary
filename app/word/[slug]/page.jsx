@@ -80,7 +80,7 @@ const DynamicWord = ({ params }) => {
 
             if (res.ok) {
                 const responseJSON = await res.json()
-                // console.log("Normal Fetched word:", responseJSON.word)
+                console.log("Normal Fetched word:", responseJSON.word)
                 setWordData(responseJSON.word)
             }
         } catch (e) {

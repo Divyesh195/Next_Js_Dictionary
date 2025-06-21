@@ -12,11 +12,10 @@ export async function GET(request, { params }) {
 
     const {word} = await params
 
-    // console.log("Dynamic word:",word);
+    console.log("Dynamic word:",word);
     
     const wordData = await collection.findOne({ word: word });
    
-
     return NextResponse.json({ ok: true, word: wordData });
   } catch (error) {
     console.log(error);
