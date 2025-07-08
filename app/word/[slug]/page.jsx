@@ -111,18 +111,20 @@ const DynamicWord = ({ params }) => {
     }
 
     const handleMarkRead = async (word) => {
-        try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/markRead/${word}`, {
-                method: "GET",
-                cache: "no-cache"
-            })
-
-            if (res.ok) {
-                const responseJSON = await res.json()
-                notify(responseJSON.message)
+        if(token){
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/markRead/${word}`, {
+                    method: "GET",
+                    cache: "no-cache"
+                })
+    
+                if (res.ok) {
+                    const responseJSON = await res.json()
+                    notify(responseJSON.message)
+                }
+            } catch (e) {
+                console.log(e)
             }
-        } catch (e) {
-            console.log(e)
         }
     }
 
