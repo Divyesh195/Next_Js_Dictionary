@@ -76,7 +76,7 @@ const SingINModal = ({ isOpen, onClose }) => {
                         value={username} onChange={(e) => setUsername(e.target.value)}
                         required
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                        placeholder="Enter your name"
+                        placeholder="Enter username"
                     />
                 </div>
 
@@ -91,7 +91,7 @@ const SingINModal = ({ isOpen, onClose }) => {
                         value={password} onChange={(e) => setPassword(e.target.value)}
                         required
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                        placeholder="Enter your email"
+                        placeholder="Enter Password"
                     />
                 </div>
 

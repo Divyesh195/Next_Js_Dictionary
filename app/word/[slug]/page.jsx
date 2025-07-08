@@ -127,22 +127,26 @@ const DynamicWord = ({ params }) => {
     }
 
     const handleDeleteWord = async (word)=>{
-        try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/delete/${word}`, {
-                method: "GET",
-                cache: "no-cache"
-            })
-
-            if (res.ok) {
-                const responseJSON = await res.json()
-                notify(responseJSON.message)
-                router.push('/')
-            }if(!res.ok){
-                const responseJSON = await res.json()
-                notify(responseJSON.message)
+        if(!token){
+            notify("Only Admin can delete.")
+        }else{
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/delete/${word}`, {
+                    method: "GET",
+                    cache: "no-cache"
+                })
+    
+                if (res.ok) {
+                    const responseJSON = await res.json()
+                    notify(responseJSON.message)
+                    router.push('/')
+                }if(!res.ok){
+                    const responseJSON = await res.json()
+                    notify(responseJSON.message)
+                }
+            } catch (e) {
+                console.log(e)
             }
-        } catch (e) {
-            console.log(e)
         }
     }
     useEffect(() => {
