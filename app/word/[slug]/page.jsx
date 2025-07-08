@@ -73,7 +73,7 @@ const DynamicWord = ({ params }) => {
 
         const { slug } = await params
         try {
-            const res = await fetch(`http://localhost:3000/api/wordData/${slug}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/wordData/${slug}`, {
                 method: "GET",
                 cache: "no-cache"
             })
@@ -90,7 +90,7 @@ const DynamicWord = ({ params }) => {
 
     const fetchNextword = async (word) => {
         try {
-            const res = await fetch(`http://localhost:3000/api/nextWord/${word}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/nextWord/${word}`, {
                 method: "GET",
                 cache: "no-cache"
             })
@@ -112,7 +112,7 @@ const DynamicWord = ({ params }) => {
 
     const handleMarkRead = async (word) => {
         try {
-            const res = await fetch(`http://localhost:3000/api/markRead/${word}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/markRead/${word}`, {
                 method: "GET",
                 cache: "no-cache"
             })
@@ -128,7 +128,7 @@ const DynamicWord = ({ params }) => {
 
     const handleDeleteWord = async (word)=>{
         try {
-            const res = await fetch(`http://localhost:3000/api/delete/${word}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/delete/${word}`, {
                 method: "GET",
                 cache: "no-cache"
             })

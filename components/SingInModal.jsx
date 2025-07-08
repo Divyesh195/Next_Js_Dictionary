@@ -31,7 +31,7 @@ const SingINModal = ({ isOpen, onClose }) => {
     const SingInHandler = async (data) => {
         try {
             {
-                const res = await fetch(`http://localhost:3000/api/singIn`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/singIn`, {
                     method: "POST",
                     cache: "no-cache",
                     body: JSON.stringify(data)

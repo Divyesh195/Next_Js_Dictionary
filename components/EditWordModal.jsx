@@ -13,7 +13,7 @@ const FormModal = ({ isOpen, onClose, onSubmit, word }) => {
             if (word == "") {
                 console.log("word is loading")
             } else {
-                const res = await fetch(`http://localhost:3000/api/wordData/${word}`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/wordData/${word}`, {
                     method: "GET",
                     cache: "no-cache"
                 })
