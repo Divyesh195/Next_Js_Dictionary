@@ -88,9 +88,9 @@ const DynamicWord = ({ params }) => {
         }
     }
 
-    const fetchNextword = async (word) => {
+    const fetchNextword = async () => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/nextWord/${word}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/nextWord`, {
                 method: "GET",
                 cache: "no-cache"
             })
@@ -98,7 +98,7 @@ const DynamicWord = ({ params }) => {
             if (res.ok) {
                 const responseJSON = await res.json()
                 if (responseJSON.NextWord.length == 0) {
-                    notify("This is the earliest word...")
+                    notify("No words available...")
                 } else {
                     setWordData(responseJSON.NextWord[0])
                     console.log(responseJSON.NextWord)
@@ -107,24 +107,6 @@ const DynamicWord = ({ params }) => {
             }
         } catch (e) {
             console.log(e)
-        }
-    }
-
-    const handleMarkRead = async (word) => {
-        if(token){
-            try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/markRead/${word}`, {
-                    method: "GET",
-                    cache: "no-cache"
-                })
-    
-                if (res.ok) {
-                    const responseJSON = await res.json()
-                    notify(responseJSON.message)
-                }
-            } catch (e) {
-                console.log(e)
-            }
         }
     }
 
@@ -155,6 +137,27 @@ const DynamicWord = ({ params }) => {
         fetchWordData()
     }, [params]);
 
+    // Auto mark as read when word loads
+    useEffect(() => {
+        const autoMarkRead = async () => {
+            if (wordData.word && token) {
+                try {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/markRead/${wordData.word}`, {
+                        method: "GET",
+                        cache: "no-cache"
+                    });
+                    if (res.ok) {
+                        const responseJSON = await res.json();
+                        notify(responseJSON.message);
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+        };
+        autoMarkRead();
+    }, [wordData.word, token]);
+
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
@@ -169,13 +172,6 @@ const DynamicWord = ({ params }) => {
                         <p className="w-fit">{
                             capitalizeFirstLetter(wordData.word)
                         }</p>
-                        <button
-                        onClick={()=>handleMarkRead(wordData.word)}
-                            className="bg-primary w-fit hover:bg-secondary text-white py-1 px-2 rounded-sm cursor-pointer flex items-center text-sm mb-1"
-                        >
-                            Mark as Read
-                        </button>
-
                     </div>
 
                 )}</h1>
@@ -203,7 +199,7 @@ const DynamicWord = ({ params }) => {
                 }
             </div>
             <button
-                onClick={() => fetchNextword(wordData.word)}
+                onClick={fetchNextword}
                 className="bg-primary w-fit hover:bg-secondary text-white py-1 px-2 rounded-sm mt-5 cursor-pointer flex items-center"
             >
                 Next Word
